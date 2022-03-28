@@ -1,131 +1,23 @@
 <html>
 
 <head>
-    <script src="words.js" type="text/javascript"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
-        integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
-    <style>
-        body {
-            font-family: 'Courier New', Courier, monospace;
-        }
-
-        #letters .col {
-            width: 30px;
-            height: 30px;
-            border: 1px solid;
-            cursor: pointer;
-            text-align: center;
-            text-transform: uppercase;
-        }
-
-        input.word {
-            text-transform: uppercase;
-        }
-
-        .red {
-            background-color: rgb(255, 167, 167);
-        }
-
-        .yellow {
-            background-color: rgb(255, 252, 80);
-        }
-
-        .green {
-            background-color: rgb(125, 235, 103);
-        }
-    </style>
+	<meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css" />
+	<title>Letreco Assistant</title>
 </head>
 
 <body>
+	Após digitar cada palavra no Letreco, volte aqui e informe a palavra e as cores de cada letra
     <table id="letters">
         <tbody>
         </tbody>
     </table>
-    <button type="button" id="btn_filter">Filter words</button>
-    <script>
-        $(document).ready(function () {
-            let html = '';
-            for (row = 1; row <= 6; row++) {
-                html += '<tr id="row_' + row + '">';
-                for (col = 1; col <= 5; col++) {
-                    html += '   <td class="col col_' + col + '" col="' + col + '"';
-                    html += '   </td>';
-                }
-                html += '   <td>';
-                html += '       <input maxlength="5" class="word" type="text" row="' + row + '" id="word_' + row + '" placeholder="Word" />';
-                html += '   </td>';
-                html += '</tr>';
-            }
-            $("#letters tbody").html(html);
-            $(".col").on("click", function () {
-                cycleColor(this);
-            });
-            $("input.word").on("keyup", function () {
-                typeWord(this);
-            });
-            $("#btn_filter").on("click", filter);
-
-            setup();
-        });
-
-        function cycleColor(cell) {
-            if ($(cell).hasClass("green")) {
-                $(cell).removeClass("green").addClass("yellow");
-            } else if ($(cell).hasClass("yellow")) {
-                $(cell).removeClass("yellow").addClass("red");
-            } else if ($(cell).hasClass("red")) {
-                $(cell).removeClass("red").addClass("white");
-            } else {
-                $(cell).addClass("green");
-            }
-        }
-
-        function typeWord(input) {
-            const text = $(input).val();
-            const row = $(input).attr("row");
-            for (let i = 1; i <= 5; i++) {
-                $("#row_" + row + " .col_" + i).html(text.length >= i ? text[i - 1] : "");
-            }
-        }
-
-        function setup() {
-            $("#word_1").val("trevo").trigger("keyup");
-            $("#row_1 .col_1").addClass("red");
-            $("#row_1 .col_2").addClass("yellow");
-            $("#row_1 .col_3").addClass("red");
-            $("#row_1 .col_4").addClass("yellow");
-            $("#row_1 .col_5").addClass("red");
-        }
-
-        function filter() {
-            let correct = [];
-            let missplaced = { 1: [], 2: [], 3: [], 4: [], 5: [] };
-            let wrong = [];
-            $(".col.green").each(function () {
-                let val = {};
-                val[$(this).attr("col")] = $(this).html().toUpperCase();
-                correct.push(val);
-            });
-            $(".col.yellow").each(function () {
-                missplaced[$(this).attr("col")].push($(this).html().toUpperCase());
-            });
-            $(".col.red").each(function () {
-                wrong.push($(this).html().toUpperCase());
-            });
-            let filtered_1 = words;
-            $(words).each(function (a, word) {
-                for (i = 0; i < wrong.length; i++) {
-                    const w = wrong[i];
-                    if (word.indexOf(w) === -1 && filtered_1.indexOf(word) === -1) {
-                        filtered_1.push(word);
-                    }
-                }
-            });
-            console.log(correct);
-            console.log(missplaced);
-            console.log(wrong);
-            console.log(filtered_1);
-        }
-    </script>
+    <button type="button" id="btn_filter">Filtrar palavras</button>
+	<div id="filtradas"></div>
+	
+    <script src="words.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+        integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+	<script src="app.js" type="text/javascript"></script>
 </body>
 <html>

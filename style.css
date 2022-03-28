@@ -1,0 +1,51 @@
+* {
+	font-family: 'Courier New', Courier, monospace;
+}
+
+#letters {
+	margin: 10px 0px;
+}
+
+#letters .col {
+	width: 30px;
+	height: 30px;
+	border: 1px solid;
+	cursor: pointer;
+	text-align: center;
+	text-transform: uppercase;
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+input.word {
+	text-transform: uppercase;
+}
+
+.red {
+	background-color: rgb(255, 167, 167);
+}
+
+.yellow {
+	background-color: rgb(255, 252, 80);
+}
+
+.green {
+	background-color: rgb(125, 235, 103);
+}
+
+#filtradas {
+	margin-top: 5px;
+}
+
+#filtradas span {
+	background: #DDD;
+	border: 1px solid #999;
+	margin: 2px;
+	padding: 0px 3px;
+	border-radius: 3px;
+	float: left;
+}
